@@ -85,19 +85,19 @@ https://aistudio.google.com/apps/df11ef6b-b7e8-4fc1-b684-64313a11646c?showPrevie
 
 **א. שימוש בקוד תכנות (Python)**
 יצרנו סקריפט פייתון המייצר נתונים אקראיים וריאליסטיים עבור הדיווחים והחקירות (סה"כ 40,000 רשומות).
-![קוד פייתון](./phaseA/generateData.png)
-
+![קוד פייתון](./phaseA/Programing/generateData.png)
 
 
 **ב. יצירת נתונים דרך אתר Mockaroo**
 השתמשנו באתר Mockaroo ליצירת 2,000 רשומות עבור טבלאות אנשי הצוות, החסימות, הערעורים והראיות.
-![Mockaroo](./phaseA/mockaroo_Bans.png)
+![Mockaroo](./phaseA/mockarooFiles/mockaroo_Bans.png)
 
 בתמונה: דוגמה לאפיון הנתונים עבור טבלת BANS בממשק Mockaroo. תהליך זהה בוצע גם עבור שאר הטבלאות (MODERATORS, APPEALS, EVIDENCE) ליצירת סך הכל של 2,000 רשומות
 
+
 **ג. ייבוא מקובץ אקסל (Data Import)**
 השתמשנו בקובץ אקסל שבו יצרנו נוסחאות אוטומטיות כדי לייצר את פקודות ה-INSERT עבור 500 סיבות החסימה.
-![Excel Data](./phaseA/BanReasons.png)
+![Excel Data](./phaseA/DataImportFiles/BanReasons.png)
 
 ---
 
