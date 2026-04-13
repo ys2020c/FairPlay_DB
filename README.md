@@ -33,13 +33,31 @@
 המערכת אופיינה ועוצבה בעזרת Google AI Studio. 
 * לחץ כאן למעבר לפרויקט ב-AI Studio:  
 https://aistudio.google.com/apps/df11ef6b-b7e8-4fc1-b684-64313a11646c?showPreview=true&showAssistant=true
+<br>
 
-**מסכי המערכת:**
-<img src="./phaseA/UI_Files/Home_screen.png" width="400">![מסך ניהול דיווחים](./phaseA/UI_Files/Report_management.png)
+**מסכי המערכת:**  
+*מסך הכניסה*
+<br>
+<img src="./phaseA/UI_Files/Home_screen.png" width="400">
+
+*מסך ניהול דיווחים*
+<br>
+![מסך ניהול דיווחים](./phaseA/UI_Files/Report_management.png)
+
+*מסך ניהול עירעורים*
+<br>
 ![מסך ניהול עירעורים](./phaseA/UI_Files/Appeals_management.png)
 
+*מסך דשבורד מנהלים*
+<br>
 ![מסך דשבורד מנהלים](./phaseA/UI_Files/Admin_Dashboard.png)
+
+*מסך תיק שחקן*
+<br>
 ![מסך תיק שחקן](./phaseA/UI_Files/Player_file.png)
+
+*מסך חדר חקירות*
+<br>
 ![מסך חדר חקירות](./phaseA/UI_Files/Interrogation_room.png)
 
 ---
