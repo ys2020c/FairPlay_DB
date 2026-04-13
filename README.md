@@ -31,13 +31,11 @@
 
 ## 2. מסכי המערכת - AI Studio
 המערכת אופיינה ועוצבה בעזרת Google AI Studio. 
-* לחץ כאן למעבר לפרויקט ב-AI Studio:
-
-* https://aistudio.google.com/apps/df11ef6b-b7e8-4fc1-b684-64313a11646c?showPreview=true&showAssistant=true
+* לחץ כאן למעבר לפרויקט ב-AI Studio:  
+https://aistudio.google.com/apps/df11ef6b-b7e8-4fc1-b684-64313a11646c?showPreview=true&showAssistant=true
 
 **מסכי המערכת:**
-![מסך ראשי](./phaseA/UI_Files/Home_screen.png)
-![מסך ניהול דיווחים](./phaseA/UI_Files/Report_management.png)
+<img src="./phaseA/UI_Files/Home_screen.png" width="400">![מסך ניהול דיווחים](./phaseA/UI_Files/Report_management.png)
 ![מסך ניהול עירעורים](./phaseA/UI_Files/Appeals_management.png)
 
 ![מסך דשבורד מנהלים](./phaseA/UI_Files/Admin_Dashboard.png)
