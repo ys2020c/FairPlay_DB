@@ -1,5 +1,5 @@
 # דוח פרויקט מסדי נתונים - שלב א'
-## מערכת Fair Play - יחידת המודירציה (Moderation)
+## Fair Play - מחלקת אכיפה ומשחק הוגן
 
 **מגיש:**
 * יובל כהן 
@@ -31,7 +31,7 @@
 
 ## 2. מסכי המערכת - AI Studio
 המערכת אופיינה ועוצבה בעזרת Google AI Studio. 
-* [לחץ כאן למעבר לפרויקט ב-AI Studio]
+* לחץ כאן למעבר לפרויקט ב-AI Studio
 https://aistudio.google.com/apps/df11ef6b-b7e8-4fc1-b684-64313a11646c?showPreview=true&showAssistant=true
 
 **מסכי המערכת:**
