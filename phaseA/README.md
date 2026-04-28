@@ -40,37 +40,37 @@ https://aistudio.google.com/apps/df11ef6b-b7e8-4fc1-b684-64313a11646c?showPrevie
 **מסכי המערכת:**  
 *מסך הכניסה*
 <br>
-<img src="./phaseA/UI_Files/Home_screen.png" width="400">
+<img src="./UI_Files/Home_screen.png" width="400">
 
 *מסך ניהול דיווחים*
 <br>
-![מסך ניהול דיווחים](./phaseA/UI_Files/Report_management.png)
+![מסך ניהול דיווחים](./UI_Files/Report_management.png)
 
 *מסך ניהול עירעורים*
 <br>
-![מסך ניהול עירעורים](./phaseA/UI_Files/Appeals_management.png)
+![מסך ניהול עירעורים](./UI_Files/Appeals_management.png)
 
 *מסך דשבורד מנהלים*
 <br>
-![מסך דשבורד מנהלים](./phaseA/UI_Files/Admin_Dashboard.png)
+![מסך דשבורד מנהלים](./UI_Files/Admin_Dashboard.png)
 
 *מסך תיק שחקן*
 <br>
-![מסך תיק שחקן](./phaseA/UI_Files/Player_file.png)
+![מסך תיק שחקן](./UI_Files/Player_file.png)
 
 *מסך חדר חקירות*
 <br>
-![מסך חדר חקירות](./phaseA/UI_Files/Interrogation_room.png)
+![מסך חדר חקירות](./UI_Files/Interrogation_room.png)
 
 ---
 
 ## 3. תרשימי מסד הנתונים (ERD & DSD)
 
 **תרשים קשרי ישויות (ERD):**
-![ERD Diagram](./phaseA/Diagrams/ERD_Diagram.png)
+![ERD Diagram](./Diagrams/ERD_Diagram.png)
 
 **תרשים סכמת נתונים (DSD):**
-![DSD Diagram](./phaseA/Diagrams/DSD_Relational_Schema.png)
+![DSD Diagram](./Diagrams/DSD_Relational_Schema.png)
 ---
 
 ## 4. החלטות עיצוב
@@ -87,28 +87,28 @@ https://aistudio.google.com/apps/df11ef6b-b7e8-4fc1-b684-64313a11646c?showPrevie
 
 **א. שימוש בקוד תכנות (Python)**
 יצרנו סקריפט פייתון המייצר נתונים אקראיים וריאליסטיים עבור הדיווחים והחקירות (סה"כ 40,000 רשומות).
-![קוד פייתון](./phaseA/Programing/generateData.png)
+![קוד פייתון](./Programing/generateData.png)
 
 
 **ב. יצירת נתונים דרך אתר Mockaroo**
 השתמשנו באתר Mockaroo ליצירת 2,000 רשומות עבור טבלאות אנשי הצוות, החסימות, הערעורים והראיות.
-![Mockaroo](./phaseA/mockarooFiles/mockaroo_Bans.png)
+![Mockaroo](./mockarooFiles/mockaroo_Bans.png)
 
 בתמונה: דוגמה לאפיון הנתונים עבור טבלת BANS בממשק Mockaroo. תהליך זהה בוצע גם עבור שאר הטבלאות (MODERATORS, APPEALS, EVIDENCE) ליצירת סך הכל של 2,000 רשומות
 
 
 **ג. ייבוא מקובץ אקסל (Data Import)**
 השתמשנו בקובץ אקסל שבו יצרנו נוסחאות אוטומטיות כדי לייצר את פקודות ה-INSERT עבור 500 סיבות החסימה.
-![Excel Data](./phaseA/DataImportFiles/BanReasons.png)
+![Excel Data](./DataImportFiles/BanReasons.png)
 
 ---
 
 ## 6. גיבוי ושחזור
 
 **ביצוע גיבוי נתונים (Backup):**
-![גיבוי מסד נתונים](./phaseA/Backup_Restore/Backup1.png)
-![גיבוי מסד נתונים](./phaseA/Backup_Restore/Backup2.png)
-* ניתן למצוא את קובץ הגיבוי המלא כאן: [backup_13_04_2026.sql](./phaseA/Backup_Restore/backup_13_04_2026.sql)
+![גיבוי מסד נתונים](./Backup_Restore/Backup1.png)
+![גיבוי מסד נתונים](./Backup_Restore/Backup2.png)
+* ניתן למצוא את קובץ הגיבוי המלא כאן: [backup_13_04_2026.sql](./Backup_Restore/backup_13_04_2026.sql)
 
 **ביצוע שחזור נתונים (Restore):**
-![שחזור מסד נתונים](./phaseA/Backup_Restore/restore.png)
+![שחזור מסד נתונים](./Backup_Restore/restore.png)
