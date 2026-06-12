@@ -9,9 +9,9 @@ services:
     container_name: PostgreSQL_DB
     restart: always
     environment:
-      POSTGRES_USER: ${DB_USER_SECRET}
-      POSTGRES_PASSWORD: ${DB_PASSWORD_SECRET}
-      POSTGRES_DB: ${DB_NAME_SECRET}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: fairplay
     ports:
       - "5432:5432"
     volumes:
@@ -28,7 +28,7 @@ services:
     container_name: pgadminApp
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_EMAIL: benyitzhaky@yatmal.co.il
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
     ports:
       - "8080:80"
