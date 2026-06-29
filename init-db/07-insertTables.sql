@@ -42498,3 +42498,58 @@ insert into APPEALS (Appeal_ID, Appeal_Text, Submission_Date, Decision, Moderato
 insert into APPEALS (Appeal_ID, Appeal_Text, Submission_Date, Decision, Moderator_ID, Ban_ID) values (498, 'Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim.', '2024-02-22', 'Denied', 325, 202);
 insert into APPEALS (Appeal_ID, Appeal_Text, Submission_Date, Decision, Moderator_ID, Ban_ID) values (499, 'Quisque id justo sit amet sapien dignissim vestibulum.', '2024-02-06', 'Pending', 497, 333);
 insert into APPEALS (Appeal_ID, Appeal_Text, Submission_Date, Decision, Moderator_ID, Ban_ID) values (500, 'Morbi quis tortor id nulla ultrices aliquet.', '2023-04-08', 'Denied', 141, 231);
+
+-- Add variety to the 1-to-1 ratio of reports to investigations
+DELETE FROM INVESTIGATIONS
+WHERE MOD(Investigation_ID, 3) = 0
+  AND NOT EXISTS (SELECT 1 FROM EVIDENCE e WHERE e.Investigation_ID = INVESTIGATIONS.Investigation_ID)
+  AND NOT EXISTS (SELECT 1 FROM BANS b WHERE b.Investigation_ID = INVESTIGATIONS.Investigation_ID);
+
+INSERT INTO REPORTS (Report_ID, Reporter_name, Suspect_name, Game_ID, Report_Date, Description) VALUES
+(90001, 'DemoUser', 'DemoSuspect', 9999, '2023-05-15', 'Demo empty report 1'),
+(90002, 'DemoUser', 'DemoSuspect', 9999, '2023-05-16', 'Demo empty report 2'),
+(90003, 'DemoUser', 'DemoSuspect', 9999, '2023-06-10', 'Demo empty report 3');
+
+-- Add variety to the appeal_rate (Query 3)
+DELETE FROM APPEALS
+WHERE MOD(Appeal_ID, 5) < 3;
+
+-- Add variety to the evidence distribution (Query 7)
+INSERT INTO EVIDENCE (Evidence_ID, Evidence_Type, URL_Link, Investigation_ID)
+SELECT Evidence_ID + 50000, 
+       CASE MOD(Evidence_ID, 4) 
+           WHEN 0 THEN 'Screenshot' 
+           WHEN 1 THEN 'Video' 
+           WHEN 2 THEN 'Chat Log' 
+           ELSE 'System Log' 
+       END, 
+       URL_Link, 
+       Investigation_ID
+FROM EVIDENCE
+WHERE MOD(Evidence_ID, 7) < 3;
+
+-- Add variety to the statuses in APPEALS and INVESTIGATIONS
+UPDATE APPEALS
+SET Decision = CASE MOD(Appeal_ID, 3)
+  WHEN 0 THEN 'Accepted'
+  WHEN 1 THEN 'Denied'
+  ELSE 'Pending'
+END;
+
+UPDATE INVESTIGATIONS
+SET Status = CASE MOD(Investigation_ID, 4)
+  WHEN 0 THEN 'In Progress'
+  WHEN 1 THEN 'In Progress'
+  ELSE 'Closed'
+END,
+Closed_Date = CASE MOD(Investigation_ID, 4)
+  WHEN 0 THEN NULL
+  WHEN 1 THEN NULL
+  ELSE COALESCE(Closed_Date, Opened_Date + 7)
+END;
+
+-- Add reports without investigations to vary the ratio for Query 1
+INSERT INTO REPORTS (Report_ID, Reporter_name, Suspect_name, Game_ID, Report_Date, Description)
+SELECT Report_ID + 50000, Reporter_name, Suspect_name, Game_ID, Report_Date, Description
+FROM REPORTS
+WHERE MOD(Report_ID, 5) = 0;

@@ -42,7 +42,7 @@ CREATE TABLE EVIDENCE
 (
   Evidence_ID INT NOT NULL,
   Evidence_Type VARCHAR(50) NOT NULL,
-  URL_Link VARCHAR(500) NOT NULL,
+  URL_Link VARCHAR(2000) NOT NULL,
   Investigation_ID INT NOT NULL,
   PRIMARY KEY (Evidence_ID, Investigation_ID),
   CHECK (Evidence_ID > 0),

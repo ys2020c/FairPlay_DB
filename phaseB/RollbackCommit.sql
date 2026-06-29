@@ -6,23 +6,23 @@
 -- =========================================================
 SELECT Appeal_ID, Decision, Submission_Date
 FROM APPEALS
-WHERE Appeal_ID = 1;
+WHERE Appeal_ID = 3;
 
 BEGIN;
 
 UPDATE APPEALS
 SET Decision = 'Accepted'
-WHERE Appeal_ID = 1;
+WHERE Appeal_ID = 3;
 
 SELECT Appeal_ID, Decision, Submission_Date
 FROM APPEALS
-WHERE Appeal_ID = 1;
+WHERE Appeal_ID = 3;
 
 ROLLBACK;
 
 SELECT Appeal_ID, Decision, Submission_Date
 FROM APPEALS
-WHERE Appeal_ID = 1;
+WHERE Appeal_ID = 3;
 
 -- =========================================================
 -- COMMIT demo
@@ -30,21 +30,21 @@ WHERE Appeal_ID = 1;
 -- =========================================================
 SELECT Investigation_ID, Status, Opened_Date, Closed_Date
 FROM INVESTIGATIONS
-WHERE Investigation_ID = 2;
+WHERE Investigation_ID = 8;
 
 BEGIN;
 
 UPDATE INVESTIGATIONS
 SET Status = 'Closed',
     Closed_Date = COALESCE(Closed_Date, Opened_Date + 3)
-WHERE Investigation_ID = 2;
+WHERE Investigation_ID = 8;
 
 SELECT Investigation_ID, Status, Opened_Date, Closed_Date
 FROM INVESTIGATIONS
-WHERE Investigation_ID = 2;
+WHERE Investigation_ID = 8;
 
 COMMIT;
 
 SELECT Investigation_ID, Status, Opened_Date, Closed_Date
 FROM INVESTIGATIONS
-WHERE Investigation_ID = 2;
+WHERE Investigation_ID = 8;

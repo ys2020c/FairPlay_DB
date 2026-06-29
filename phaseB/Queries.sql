@@ -242,6 +242,13 @@ LIMIT 20;
 -- =========================================================
 -- UPDATE 1: Assign old open investigations to a senior moderator
 -- =========================================================
+-- שאילתה לבדיקת המצב לפני העדכון (נראה את תפקיד המודרטור המקורי לפני ההחלפה):
+SELECT i.Investigation_ID, i.Status, i.Moderator_ID, m.Role AS Current_Moderator_Role
+FROM INVESTIGATIONS i
+JOIN MODERATORS m ON i.Moderator_ID = m.Moderator_ID
+WHERE i.Status = 'In Progress' 
+  AND i.Opened_Date < DATE '2023-06-01';
+
 UPDATE INVESTIGATIONS
 SET Moderator_ID = (
   SELECT Moderator_ID
@@ -253,11 +260,39 @@ SET Moderator_ID = (
 WHERE Status = 'In Progress'
   AND Opened_Date < DATE '2023-06-01';
 
+-- שאילתה לבדיקת המצב לאחר העדכון (נוודא שהמודרטור הוחלף ל-Senior moderator):
+SELECT i.Investigation_ID, i.Status, i.Moderator_ID, m.Role AS New_Moderator_Role
+FROM INVESTIGATIONS i
+JOIN MODERATORS m ON i.Moderator_ID = m.Moderator_ID
+WHERE i.Status = 'In Progress' 
+  AND i.Opened_Date < DATE '2023-06-01';
+
+-- שאילתה לבדיקת המצב לפני העדכון:
+SELECT Appeal_ID, Submission_Date, Decision
+FROM APPEALS
+WHERE Decision = 'Pending'
+  AND Submission_Date < DATE '2023-06-01';
+
 -- UPDATE 2: Mark old pending appeals as denied for demo data cleanup
 UPDATE APPEALS
 SET Decision = 'Denied'
 WHERE Decision = 'Pending'
   AND Submission_Date < DATE '2023-06-01';
+
+-- שאילתה לבדיקת המצב לאחר העדכון (נוודא שהסטטוס השתנה):
+SELECT Appeal_ID, Submission_Date, Decision
+FROM APPEALS
+WHERE Submission_Date < DATE '2023-06-01';
+
+-- שאילתה לבדיקת המצב לפני העדכון:
+SELECT b.Ban_ID, b.Start_Date, b.End_Date, b.Investigation_ID
+FROM BANS b
+WHERE EXISTS (
+  SELECT 1
+  FROM EVIDENCE e
+  WHERE e.Investigation_ID = b.Investigation_ID
+    AND e.Evidence_Type = 'System Log'
+);
 
 -- UPDATE 3: Extend bans connected to system-log evidence
 UPDATE BANS b
@@ -267,6 +302,26 @@ WHERE EXISTS (
   FROM EVIDENCE e
   WHERE e.Investigation_ID = b.Investigation_ID
     AND e.Evidence_Type = 'System Log'
+);
+
+-- שאילתה לבדיקת המצב לאחר העדכון:
+SELECT b.Ban_ID, b.Start_Date, b.End_Date, b.Investigation_ID
+FROM BANS b
+WHERE EXISTS (
+  SELECT 1
+  FROM EVIDENCE e
+  WHERE e.Investigation_ID = b.Investigation_ID
+    AND e.Evidence_Type = 'System Log'
+);
+
+-- שאילתה לבדיקת המצב לפני המחיקה:
+SELECT a.Appeal_ID, a.Ban_ID, a.Decision
+FROM APPEALS a
+WHERE EXISTS (
+  SELECT 1
+  FROM BANS b
+  WHERE b.Ban_ID = a.Ban_ID
+    AND b.End_Date - b.Start_Date <= 1
 );
 
 -- =========================================================
@@ -280,12 +335,62 @@ WHERE EXISTS (
     AND b.End_Date - b.Start_Date <= 1
 );
 
+-- שאילתה לבדיקת המצב לאחר המחיקה (נוודא שהרשומות נמחקו - מצפים ל-0 תוצאות):
+SELECT a.Appeal_ID, a.Ban_ID, a.Decision
+FROM APPEALS a
+WHERE EXISTS (
+  SELECT 1
+  FROM BANS b
+  WHERE b.Ban_ID = a.Ban_ID
+    AND b.End_Date - b.Start_Date <= 1
+);
+
+-- שאילתה לבדיקת המצב לפני המחיקה:
+SELECT Evidence_ID, Evidence_Type, URL_Link
+FROM EVIDENCE
+WHERE URL_Link NOT LIKE 'http%';
+
 -- DELETE 2: Delete evidence rows that use non-http demo links
 DELETE FROM EVIDENCE
 WHERE URL_Link NOT LIKE 'http%';
 
+-- שאילתה לבדיקת המצב לאחר המחיקה (נוודא שהרשומות נמחקו - מצפים ל-0 תוצאות):
+SELECT Evidence_ID, Evidence_Type, URL_Link
+FROM EVIDENCE
+WHERE URL_Link NOT LIKE 'http%';
+
+-- שאילתה לבדיקת המצב לפני המחיקה:
+SELECT Investigation_ID, Report_ID, Status
+FROM INVESTIGATIONS
+WHERE Report_ID IS NULL
+  AND NOT EXISTS (
+    SELECT 1
+    FROM EVIDENCE e
+    WHERE e.Investigation_ID = INVESTIGATIONS.Investigation_ID
+  )
+  AND NOT EXISTS (
+    SELECT 1
+    FROM BANS b
+    WHERE b.Investigation_ID = INVESTIGATIONS.Investigation_ID
+  );
+
 -- DELETE 3: Delete orphan investigations that are not linked to a report
 DELETE FROM INVESTIGATIONS
+WHERE Report_ID IS NULL
+  AND NOT EXISTS (
+    SELECT 1
+    FROM EVIDENCE e
+    WHERE e.Investigation_ID = INVESTIGATIONS.Investigation_ID
+  )
+  AND NOT EXISTS (
+    SELECT 1
+    FROM BANS b
+    WHERE b.Investigation_ID = INVESTIGATIONS.Investigation_ID
+  );
+
+-- שאילתה לבדיקת המצב לאחר המחיקה (נוודא שהרשומות נמחקו - מצפים ל-0 תוצאות):
+SELECT Investigation_ID, Report_ID, Status
+FROM INVESTIGATIONS
 WHERE Report_ID IS NULL
   AND NOT EXISTS (
     SELECT 1
