@@ -39,12 +39,7 @@
 ### מבט 1: Suspicious_Games_View
 * **תיאור מילולי:** מבט מנקודת המבט של הנהלת משחקי השחמט. הוא מאגד את נתוני המשחקים (זמנים, סוגים) ומראה כמה דיווחים התקבלו על כל משחק.
 * **קוד שרץ (לדוגמה):** `SELECT * FROM Suspicious_Games_View LIMIT 10;`
-* **פלט:** 
-  ```text
-   game_id | start_date | result | time_control | variant | total_reports 
-  ---------+------------+--------+--------------+---------+---------------
-         1 | 2023-01-01 |        |              |         |         30003
-  ```
+* **פלט:** `[יש להדביק כאן את הפלט של השאילתה - תמונת מסך או טבלה]`
 
 **שאילתות על המבט:**
 1. **מציאת משחקים עם יותר מדיווח אחד:**
@@ -52,45 +47,18 @@
      ```sql
      SELECT * FROM Suspicious_Games_View WHERE Total_Reports > 1 ORDER BY Total_Reports DESC;
      ```
-   * פלט: 
-     ```text
-      game_id | start_date | result | time_control | variant | total_reports 
-     ---------+------------+--------+--------------+---------+---------------
-            1 | 2023-01-01 |        |              |         |         30003
-     ```
+   * פלט: `[הדבק פלט כאן]`
 2. **מציאת משחקים חשודים מסוג בליץ:**
    * קוד: 
      ```sql
      SELECT * FROM Suspicious_Games_View WHERE Time_Control = 'Blitz' ORDER BY start_date DESC;
      ```
-   * פלט: 
-     ```text
-      game_id | start_date | result | time_control | variant | total_reports 
-     ---------+------------+--------+--------------+---------+---------------
-     (0 rows)
-     ```
+   * פלט: `[הדבק פלט כאן]`
 
 ### מבט 2: Moderation_Queue_View
 * **תיאור מילולי:** מבט מנקודת המבט של מערכת המודרציה שלנו. המבט מציג למודרטורים את רשימת החקירות הפעילות ומחבר אליהן את סיבת הדיווח ואת פרטי משחק השחמט הרלוונטי.
 * **קוד שרץ (לדוגמה):** `SELECT * FROM Moderation_Queue_View LIMIT 10;`
-* **פלט:** 
-  ```text
-   investigation_id | opened_date |   status    |  moderator_name  | report_id | reporter_name | suspect_name |                            report_reason                             | game_id | game_date  
-  ------------------+-------------+-------------+------------------+-----------+---------------+--------------+----------------------------------------------------------------------+---------+------------
-                  8 | 2023-03-09  | Closed      | Lurlene Yesipov  |         8 | Player_7364   | Player_18732 | Abusive chat behavior and inappropriate profile picture.             |       1 | 2023-01-01
-                 32 | 2023-02-17  | In Progress | Miguela Karslake |        32 | Player_8574   | Player_10091 | Player rating is 800 but they played like a Grandmaster.             |       1 | 2023-01-01
-                344 | 2023-05-28  | In Progress | Miguela Karslake |       344 | Player_7837   | Player_12962 | Stalling the game! They let the clock run out instead of resigning.  |       1 | 2023-01-01
-                356 | 2023-01-21  | In Progress | Miguela Karslake |       356 | Player_8932   | Player_16897 | Using an opening explorer during a live rapid game.                  |       1 | 2023-01-01
-                380 | 2023-05-01  | In Progress | Miguela Karslake |       380 | Player_8086   | Player_16219 | Opponent played perfect engine moves with 1 second delay every time. |       1 | 2023-01-01
-  ``````text
-   investigation_id | opened_date |   status    |  moderator_name  | report_id |                            report_reason                             | game_id | game_date  
-  ------------------+-------------+-------------+------------------+-----------+----------------------------------------------------------------------+---------+------------
-                  8 | 2023-03-09  | Closed      | Lurlene Yesipov  |         8 | Abusive chat behavior and inappropriate profile picture.             |       1 | 2023-01-01
-                 32 | 2023-02-17  | In Progress | Miguela Karslake |        32 | Player rating is 800 but they played like a Grandmaster.             |       1 | 2023-01-01
-                344 | 2023-05-28  | In Progress | Miguela Karslake |       344 | Stalling the game! They let the clock run out instead of resigning.  |       1 | 2023-01-01
-                356 | 2023-01-21  | In Progress | Miguela Karslake |       356 | Using an opening explorer during a live rapid game.                  |       1 | 2023-01-01
-                380 | 2023-05-01  | In Progress | Miguela Karslake |       380 | Opponent played perfect engine moves with 1 second delay every time. |       1 | 2023-01-01
-  ```
+* **פלט:** `[יש להדביק כאן את הפלט של השאילתה - תמונת מסך או טבלה]`
 
 **שאילתות על המבט:**
 1. **הצגת כל החקירות הפתוחות כרגע:**
@@ -98,37 +66,10 @@
      ```sql
      SELECT * FROM Moderation_Queue_View WHERE Status = 'In Progress' ORDER BY Opened_Date;
      ```
-   * פלט: 
-     ```text
-      investigation_id | opened_date |   status    |  moderator_name  | report_id | reporter_name | suspect_name |                      report_reason                       | game_id | game_date  
-     ------------------+-------------+-------------+------------------+-----------+---------------+--------------+----------------------------------------------------------+---------+------------
-                 16508 | 2023-01-01  | In Progress | Miguela Karslake |     16508 | Player_4339   | Player_16776 | Abusive chat behavior and inappropriate profile picture. |       1 | 2023-01-01
-                   808 | 2023-01-02  | In Progress | Miguela Karslake |       808 | Player_9689   | Player_13311 | Abusive chat behavior and inappropriate profile picture. |       1 | 2023-01-01
-                  9128 | 2023-01-02  | In Progress | Miguela Karslake |      9128 | Player_4706   | Player_15574 | Abusive chat behavior and inappropriate profile picture. |       1 | 2023-01-01
-                  8108 | 2023-01-03  | In Progress | Miguela Karslake |      8108 | Player_287    | Player_13324 | Abusive chat behavior and inappropriate profile picture. |       1 | 2023-01-01
-                  4148 | 2023-01-03  | In Progress | Miguela Karslake |      4148 | Player_1365   | Player_11084 | Abusive chat behavior and inappropriate profile picture. |       1 | 2023-01-01
-     ```
-     ```text
-      investigation_id | opened_date |   status    |  moderator_name  | report_id |                      report_reason                       | game_id | game_date  
-     ------------------+-------------+-------------+------------------+-----------+----------------------------------------------------------+---------+------------
-                 16508 | 2023-01-01  | In Progress | Miguela Karslake |     16508 | Abusive chat behavior and inappropriate profile picture. |       1 | 2023-01-01
-                   808 | 2023-01-02  | In Progress | Miguela Karslake |       808 | Abusive chat behavior and inappropriate profile picture. |       1 | 2023-01-01
-                  9128 | 2023-01-02  | In Progress | Miguela Karslake |      9128 | Abusive chat behavior and inappropriate profile picture. |       1 | 2023-01-01
-                  8108 | 2023-01-03  | In Progress | Miguela Karslake |      8108 | Abusive chat behavior and inappropriate profile picture. |       1 | 2023-01-01
-                  4148 | 2023-01-03  | In Progress | Miguela Karslake |      4148 | Abusive chat behavior and inappropriate profile picture. |       1 | 2023-01-01
-     ```
+   * פלט: `[הדבק פלט כאן]`
 2. **בדיקת עומס על כל מודרטור:**
    * קוד: 
      ```sql
      SELECT Moderator_Name, COUNT(Investigation_ID) as Active_Investigations, MIN(Game_Date) as Oldest_Game FROM Moderation_Queue_View WHERE Status = 'In Progress' GROUP BY Moderator_Name;
      ```
-   * פלט: 
-     ```text
-        moderator_name   | active_investigations | oldest_game 
-     --------------------+-----------------------+-------------
-      Corenda Anthonies  |                     3 | 2023-01-01
-      Dee dee Beames     |                     4 | 2023-01-01
-      Clarissa Lewsey    |                     3 | 2023-01-01
-      Brandice Farncombe |                     5 | 2023-01-01
-      Rodrique Cicchillo |                     3 | 2023-01-01
-     ```
+   * פלט: `[הדבק פלט כאן]`
