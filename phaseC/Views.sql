@@ -46,6 +46,8 @@ SELECT
     i.Status,
     m.Mname AS Moderator_Name,
     r.Report_ID,
+    r.Reporter_name,
+    r.Suspect_name,
     r.Description AS Report_Reason,
     g.game_id,
     g.start_date AS Game_Date
