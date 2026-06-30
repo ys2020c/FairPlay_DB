@@ -80,10 +80,51 @@
 
 ---
 
-## צילומי מסך נדרשים להשלמה
-כדי שהדוח יהיה מוכן לגמרי להגשה, עדיין צריך להוסיף צילומי מסך מהרצה בפועל:
-- לכל אחת מ-8 שאילתות ה-`SELECT`: צילום הרצה וצילום עד 5 שורות תוצאה.
-- לכל `UPDATE` ו-`DELETE`: מצב לפני ואחרי.
-- לכל אילוץ: ניסיון הכנסה שגוי ושגיאת הרצה.
-- ל-`ROLLBACK` ול-`COMMIT`: מצב בכל שלב.
-- לאינדקסים: זמני ריצה לפני ואחרי.
+## צילומי מסך מהרצה בפועל
+
+**שאילתות SELECT:**
+![SELECT 1](./images/queries/Q1.png)
+![SELECT 2](./images/queries/Q2.png)
+![SELECT 3](./images/queries/Q3.png)
+![SELECT 4](./images/queries/Q4.png)
+![SELECT 5](./images/queries/Q5.png)
+![SELECT 6](./images/queries/Q6.png)
+![SELECT 7](./images/queries/Q7.png)
+![SELECT 8](./images/queries/Q8.png)
+
+**שאילתות UPDATE:**
+![update 1 before](./images/update/beforeU1.png)
+![update 1 after](./images/update/afterU1.png)
+![update 2 before](./images/update/beforeU2.png)
+![update 2 after](./images/update/afterU2.png)
+![update 3 before](./images/update/beforeU3.png)
+![update 3 after](./images/update/afterU3.png)
+
+**שאילתות DELETE:**
+![delete 1 before](./images/delete/beforeD1.png)
+![delete 1 after](./images/delete/afterD1.png)
+![delete 2 before](./images/delete/beforeD2.png)
+![delete 2 after](./images/delete/afterD2.png)
+![delete 3 before](./images/delete/beforeD3.png)
+![delete 3 after](./images/delete/afterD3.png)
+
+**אילוצים (Constraints):**
+![constraint 1](./images/constraints/constraint1.png)
+![constraint 2](./images/constraints/constraint2.png)
+![constraint 3](./images/constraints/constraint3.png)
+
+**Rollback ו-Commit:**
+![rollback before](./images/RollbackAndCommit/beforeRollback.png)
+![rollback during](./images/RollbackAndCommit/duringRollback.png)
+![rollback after](./images/RollbackAndCommit/afterRollback.png)
+![commit before](./images/RollbackAndCommit/beforeCommit.png)
+![commit during](./images/RollbackAndCommit/duringCommit.png)
+![commit after](./images/RollbackAndCommit/afterCommit.png)
+
+**אינדקסים (Indexes):**
+![index 1 before](./images/index/beforeIndex1.png)
+![index 1 after](./images/index/afterIndex1.png)
+![index 2 before](./images/index/beforeIndex2.png)
+![index 2 after](./images/index/afterIndex2.png)
+![index 3 before](./images/index/beforeIndex3.png)
+![index 3 after](./images/index/afterIndex3.png)

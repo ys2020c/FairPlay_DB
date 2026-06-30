@@ -82,7 +82,10 @@ CREATE TABLE Game (
 -- ======================================================================================
 
 -- עדכון הנתונים הקיימים כדי למנוע שגיאות Constraint בעת חיבור הדיווחים.
--- אנו קובעים שכל דיווח קיים יצביע למשחק ולידי קיים בטבלת השחמט.
+-- קודם נכניס נתוני דמו בסיסיים לטבלאות השחמט כדי שהחיבור יעבוד:
+INSERT INTO Player (player_id, username) VALUES (1, 'DemoWhite'), (2, 'DemoBlack') ON CONFLICT DO NOTHING;
+INSERT INTO Game (game_id, white_player_id, black_player_id, start_date, end_date) VALUES (1, 1, 2, DATE '2023-01-01', DATE '2023-01-01') ON CONFLICT DO NOTHING;
+
 UPDATE REPORTS
 SET Game_ID = (SELECT MIN(game_id) FROM Game);
 
@@ -90,3 +93,28 @@ SET Game_ID = (SELECT MIN(game_id) FROM Game);
 ALTER TABLE REPORTS
 ADD CONSTRAINT FK_Report_Game 
 FOREIGN KEY (Game_ID) REFERENCES Game(game_id);
+
+-- ==========================================
+-- הוספת מפתחות זרים לשחקנים (דיווחים וחסימות)
+-- ==========================================
+
+-- שלב א: אכלוס טבלת השחקנים (Player) מתוך השמות שכבר קיימים במערכת האכיפה 
+-- כדי למנוע שגיאות של חוסר התאמה בזמן יצירת המפתחות הזרים.
+INSERT INTO Player (player_id, username)
+SELECT ROW_NUMBER() OVER (ORDER BY username) + 100, username
+FROM (
+  SELECT Reporter_name AS username FROM REPORTS
+  UNION
+  SELECT Suspect_name FROM REPORTS
+  UNION
+  SELECT Banned_Player FROM BANS
+) AS existing_users
+ON CONFLICT DO NOTHING;
+
+-- שלב ב: הגדרת אילוץ יוניק על שם המשתמש בטבלת השחקנים (כדי שנוכל לקשר אליו מפתחות זרים טקסטואליים)
+ALTER TABLE Player ADD CONSTRAINT UQ_Player_Username UNIQUE (username);
+
+-- שלב ג: הוספת מפתחות זרים שמקשרים כל דיווח וכל חסימה לשחקן רשום
+ALTER TABLE REPORTS ADD CONSTRAINT FK_Report_Reporter FOREIGN KEY (Reporter_name) REFERENCES Player(username);
+ALTER TABLE REPORTS ADD CONSTRAINT FK_Report_Suspect FOREIGN KEY (Suspect_name) REFERENCES Player(username);
+ALTER TABLE BANS ADD CONSTRAINT FK_Bans_Player FOREIGN KEY (Banned_Player) REFERENCES Player(username);
