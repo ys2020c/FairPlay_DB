@@ -39,7 +39,7 @@
 ### מבט 1: Suspicious_Games_View
 * **תיאור מילולי:** מבט מנקודת המבט של הנהלת משחקי השחמט. הוא מאגד את נתוני המשחקים (זמנים, סוגים) ומראה כמה דיווחים התקבלו על כל משחק.
 * **קוד שרץ (לדוגמה):** `SELECT * FROM Suspicious_Games_View LIMIT 10;`
-* **פלט:** `[יש להדביק כאן את הפלט של השאילתה - תמונת מסך או טבלה]`
+* **פלט:** ![מבט ראשון](./Suspicious_Games_View_Query.png)
 
 **שאילתות על המבט:**
 1. **מציאת משחקים עם יותר מדיווח אחד:**
@@ -47,18 +47,18 @@
      ```sql
      SELECT * FROM Suspicious_Games_View WHERE Total_Reports > 1 ORDER BY Total_Reports DESC;
      ```
-   * פלט: `[הדבק פלט כאן]`
+   * פלט: ![משחקים חשודים](./Suspicious_Games_View.png)
 2. **מציאת משחקים חשודים מסוג בליץ:**
    * קוד: 
      ```sql
      SELECT * FROM Suspicious_Games_View WHERE Time_Control = 'Blitz' ORDER BY start_date DESC;
      ```
-   * פלט: `[הדבק פלט כאן]`
+   * פלט: ![משחקים חשודים מסוג בליץ](./Suspicious_Games_Blitz.png)
 
 ### מבט 2: Moderation_Queue_View
 * **תיאור מילולי:** מבט מנקודת המבט של מערכת המודרציה שלנו. המבט מציג למודרטורים את רשימת החקירות הפעילות ומחבר אליהן את סיבת הדיווח ואת פרטי משחק השחמט הרלוונטי.
 * **קוד שרץ (לדוגמה):** `SELECT * FROM Moderation_Queue_View LIMIT 10;`
-* **פלט:** `[יש להדביק כאן את הפלט של השאילתה - תמונת מסך או טבלה]`
+* **פלט:** ![מבט שני](./Moderation_Queue_View_Query.png)
 
 **שאילתות על המבט:**
 1. **הצגת כל החקירות הפתוחות כרגע:**
@@ -66,10 +66,10 @@
      ```sql
      SELECT * FROM Moderation_Queue_View WHERE Status = 'In Progress' ORDER BY Opened_Date;
      ```
-   * פלט: `[הדבק פלט כאן]`
+   * פלט: ![חקירות פתוחות](./Moderation_Queue_View_Open.png)
 2. **בדיקת עומס על כל מודרטור:**
    * קוד: 
      ```sql
      SELECT Moderator_Name, COUNT(Investigation_ID) as Active_Investigations, MIN(Game_Date) as Oldest_Game FROM Moderation_Queue_View WHERE Status = 'In Progress' GROUP BY Moderator_Name;
      ```
-   * פלט: `[הדבק פלט כאן]`
+   * פלט: ![בדיקת עומס על כל מודרטור](./Moderation_Queue_View_Workload.png)
